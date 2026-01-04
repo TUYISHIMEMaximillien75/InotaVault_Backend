@@ -1,0 +1,12 @@
+// Enable TypeScript support for Sequelize CLI
+require("ts-node/register");
+require("tsconfig-paths/register");
+
+const path = require("path");
+
+module.exports = {
+  config: path.resolve("src/config/db_config.ts"),
+  "models-path": path.resolve("src/database/models"),
+  "seeders-path": path.resolve("src/database/seeders"),
+  "migrations-path": path.resolve("src/database/migrations"),
+};
