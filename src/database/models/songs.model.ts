@@ -11,6 +11,7 @@ export interface SongAttributes {
     audio_url?: string;
     video_url?: string;
     external_link?: string;
+    view_count: number;
 
     created_at: Date;
     updated_at: Date;
@@ -36,6 +37,7 @@ export class Song
   declare audio_url?: string;
   declare video_url?: string;
   declare external_link?: string;
+  declare view_count: number;
 
   declare created_at: Date;
   declare updated_at: Date;
@@ -85,6 +87,12 @@ export const initSongModel = (sequelize: Sequelize) => {
       external_link: {
         type: DataTypes.STRING,
         allowNull: true,
+      },
+
+      view_count: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
 
       created_at: {

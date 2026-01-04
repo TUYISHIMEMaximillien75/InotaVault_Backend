@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { uploadSong } from "../controllers/song.controller.ts";
+import { getSongByIdController, uploadSong } from "../controllers/song.controller.ts";
 import { upload } from "../middlewares/upload.middleware.ts";
 import { authMiddleware } from "../middlewares/auth.middleware.ts";
-
+import { getAllSongs } from "../controllers/song.controller.ts";
 const songsRouter = Router();
 
 songsRouter.post(
@@ -16,6 +16,9 @@ songsRouter.post(
   uploadSong
 );
 
-// songsRouter.get("/songs", getAllSongs)
+songsRouter.get("/allsongs", getAllSongs)
+
+songsRouter.get("/songs/:id", getSongByIdController)
+
 
 export default songsRouter;

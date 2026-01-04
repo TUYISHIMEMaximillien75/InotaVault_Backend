@@ -1,7 +1,23 @@
 import type { Request, Response } from "express";
-
 import { uploadToCloudinary } from "../utils/cloudinaryUpload.ts";
+
 import { Song } from "../database/models/songs.model.ts";
+import { SongService } from "../services/song.servicees.ts";
+
+
+const songService = new SongService();
+
+interface MulterFiles {
+    pdf?: Express.Multer.File[];
+    audio?: Express.Multer.File[];
+    video?: Express.Multer.File[];
+}
+
+interface RequestParams extends Request {
+    params: {
+        id: string;
+    };
+}
 
 export const uploadSong = async (req: Request, res: Response) => {
     try {
@@ -49,5 +65,33 @@ export const uploadSong = async (req: Request, res: Response) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Upload failed" });
+    }
+}
+export const getAllSongs = async (req: Request, res: Response) => {
+    try {
+
+        const songs = await songService.getAllSongs();
+        res.status(200).json({ success: true, data: songs });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Failed to retrieve songs" });
+    }
+}
+
+export const getSongByIdController = async (req: RequestParams, res: Response) => {
+    try {
+        const { id } = req.params;
+        if (!id) {
+            return res.status(400).json({ message: "Song ID is required" });
+        }
+        const song = await songService.getSongById(id);
+
+        if (!song) {
+            return res.status(404).json({ message: "Song not found" });
+        }
+        res.status(200).json({ success: true, data: song });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Failed to retrieve song" });
     }
 }
