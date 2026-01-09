@@ -1,6 +1,7 @@
 import User from "../database/models/user.model.ts";
 import { hashPassword, comparePassword, } from "../utils/password.ts";
 import { generateToken } from "../utils/jwt.ts";
+import { sendEmail } from "../utils/sendEmail.ts";
 
 
 
@@ -23,13 +24,16 @@ export const createUser = async (data: CreateUserInput) => {
         password: hashedPassword,
     })
 
-    const token = generateToken({
-        id: user.id,
-        email: user.email,
-        role: user.role,
-    })
+    const email =  await sendEmail(data.email, user.id);
+    console.log("result from email is ", email);
 
-    return { user, token };
+    // const token = generateToken({
+    //     id: user.id,
+    //     email: user.email,
+    //     role: user.role,
+    // })
+
+    return "user created successfully please verify your email"; //{ user, token };
 }
 
 
@@ -56,5 +60,16 @@ export const loginUser = async (data: LoginUserInput) => {
         role: user.role,
     })
 
-    return {user, token};
+    return { user, token };
+}
+
+export const verifyUser = async (userId: string) => {
+    const user = await User.findByPk(userId);
+    if (!user) {
+        throw new Error("User not found");
+    }
+    user.verified = true;
+    await user.save();
+    console.log("user is verified with id ", userId);
+    return user;
 }

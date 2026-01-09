@@ -20,3 +20,12 @@ JWT_EXPIRES_IN=7d
 CLOUDINARY_CLOUD_NAME=dnvdcpjlw
 CLOUDINARY_API_KEY=699698619364361
 CLOUDINARY_API_SECRET= 
+
+
+# .env file
+SMTP_HOST=your_smtp_host
+SMTP_PORT=587 # or 465 for secure
+SMTP_USER=your_smtp_username
+SMTP_PASS=your_smtp_password
+SENDER_EMAIL="Your Name" <your-email@example.com>
+RECEIVER_EMAIL=recipient-email@example.com

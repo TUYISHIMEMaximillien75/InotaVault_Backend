@@ -1,12 +1,13 @@
 import type { Request, Response } from "express";
 import { createUser, loginUser } from "../services/user.services.ts";
-
+import { verifyUser } from "../services/user.services.ts";
 export class UserController {
 
     async registerUser(req: Request, res: Response) {
 
         // console.log("It's your boy controller")
         try {
+
 
             const user = await createUser(req.body);
 
@@ -31,6 +32,16 @@ export class UserController {
             res.status(400).json({ message: error.message });
         }
 
+    }
+
+    async verifyUser(req: Request, res: Response) {
+        try {
+            const userId:string = req.params['id'] as string;
+            const user = await verifyUser(userId);
+            res.status(200).json({ success: true, data: user });
+        } catch (error) {
+            
+        }
     }
 
 }

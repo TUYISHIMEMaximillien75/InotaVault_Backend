@@ -11,7 +11,7 @@ export interface SongAttributes {
     audio_url?: string;
     video_url?: string;
     external_link?: string;
-    view_count: number;
+    view_count?: number;
 
     created_at: Date;
     updated_at: Date;

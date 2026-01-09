@@ -8,12 +8,22 @@ interface UserAttributes {
     role: string;
     created_at: Date;
     updated_at: Date;
+    verified: boolean;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes,
     "id" | "role" | "created_at" | "updated_at"
 > { }
-export class User extends Model<UserAttributes, UserCreationAttributes> { }
+export class User extends Model<UserAttributes, UserCreationAttributes> { 
+    declare id: string;
+    declare full_name: string;
+    declare email: string;
+    declare password: string;
+    declare role: string;
+    declare created_at: Date;
+    declare updated_at: Date;
+    declare verified: boolean;
+}
 
 
 export const initUserModel = (sequelize: Sequelize) => {
@@ -52,6 +62,10 @@ export const initUserModel = (sequelize: Sequelize) => {
                 defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
 
             },
+            verified: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false,
+            }
         },
         {
             sequelize, // I'll deal with this mukanya
