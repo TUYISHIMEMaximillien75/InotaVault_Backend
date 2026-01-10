@@ -3,7 +3,8 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.addColumn("songs", "verified", {
-      type: Sequelize.BOLEAN,
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
       defaultValue: false,
     });
   },

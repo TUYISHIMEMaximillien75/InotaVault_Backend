@@ -6,4 +6,7 @@ export interface createSongAttributes {
     external_link?: string | undefined;
     description?: string | undefined;
     user_id: string;
+    artist: string;
+    usage: string;
+    
 }

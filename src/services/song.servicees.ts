@@ -7,10 +7,21 @@ export class SongService {
         return song;
     }
 
-    getAllSongs = async () => {
+    getAllSongs = async (filter: string) => {
 
+        if(filter === "ALL" || filter === "all"){
         const songs = await Song.findAll();
         return songs;
+
+        }else{
+        const songs = await Song.findAll({
+            where: {
+                usage: filter
+            }
+        });
+        return songs;
+
+        }
 
     }
 
@@ -24,7 +35,7 @@ export class SongService {
             song.view_count = count_num + 1;
             await song.save();
         }
-        console.log(song?.view_count);
+        // console.log(song?.view_count);
 
         return song;
     }
@@ -47,6 +58,8 @@ export class SongService {
         return true;
     }
 
+
+
 }
 
 // const song = await Song.create({
@@ -63,3 +76,13 @@ export class SongService {
 //         song.description = description || song.description;
 //         song.external_link = external_link || song.external_link;
 //         await song.save();
+
+
+    // songFilter = async (filter: string) =>{
+    //     const song = await Song.findAll({
+    //         where:{
+    //             usage: filter
+    //         }
+    //     })
+    //     return song
+    // }

@@ -1,7 +1,7 @@
-import app from "./app";
-import { config } from "./config";
-import { sequelize } from "./config/db";
-import { initModels } from "./database/models";
+import app from "./app.ts";
+import { config } from "./config/index.ts";
+import { sequelize } from "./config/db.ts";
+import { initModels } from "./database/models/index.ts";
 
 const startServer = async () => {
   try {

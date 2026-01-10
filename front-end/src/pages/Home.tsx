@@ -12,7 +12,7 @@ export default function Home() {
         <p className="mt-6 max-w-2xl text-lg text-gray-600">
           InotaVault is a digital platform designed to help musicians,
           choirs, and music lovers easily <strong>share, discover, and manage
-          music sheets</strong> in one secure place.
+            music sheets</strong> in one secure place.
         </p>
 
         <div className="mt-10 flex gap-4">

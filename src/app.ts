@@ -1,10 +1,11 @@
-import express, { Express } from "express";
+import express from "express";
+import type { Express } from "express";
 import cors from "cors";
-import songsRouter from "./routes/songs.routes";
-import { userRouter } from "./routes/user.routes";
+import songsRouter from "./routes/songs.routes.ts";
+import { userRouter } from "./routes/user.routes.ts";
 import swaggerUi from "swagger-ui-express";
-import { swaggerSpec } from "./config/swagger";
-import { config } from "./config";
+import { swaggerSpec } from "./config/swagger.ts";
+import { config } from "./config/index.ts";
 
 const app: Express = express();
 
