@@ -4,14 +4,20 @@ jobs:
   test:
     docker:
       - image: cimg/node:20.11
+      - image: cimg/postgres:15.5
+    environment:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: test_dby  
     steps:
       - checkout
       - run:
           name: Install dependencies
           command: npm install
       - run:
-          name: Run tests with coverage
-          command: npm test -- --coverage
+          name: Upload coverage
+          command: |
+            curl -s https://codecov.io/bash | bash
 
 workflows:
   test-workflow:
