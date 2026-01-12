@@ -16,3 +16,4 @@ The React Compiler is not enabled on this template because of its impact on dev 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 # InotaValut 🎼
 
+[![codecov](https://codecov.io/gh/TUYISHIMEMaximillien75/InotaVault_Backend/graph/badge.svg?token=6WNPKX26U6)](https://codecov.io/gh/TUYISHIMEMaximillien75/InotaVault_Backend)
