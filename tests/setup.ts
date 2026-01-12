@@ -1,7 +1,10 @@
-beforeAll(async () => {
-  console.log("🧪 Test environment started");
-});
+import dotenv from "dotenv";
+dotenv.config();
 
-afterAll(async () => {
-  console.log("🧪 Test environment finished");
-});
+jest.mock("../src/config/cloudinary.ts", () => ({
+  uploader: {
+    upload_stream: jest.fn(() => ({
+      end: jest.fn(),
+    })),
+  },
+}));

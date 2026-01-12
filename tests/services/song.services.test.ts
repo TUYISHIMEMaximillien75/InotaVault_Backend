@@ -1,14 +1,26 @@
 import { SongService } from "../../src/services/song.servicees";
+import { Song } from "../../src/database/models/songs.model";
 
-describe("Song service testing", ()=>{
-    const songService = new SongService();
+jest.mock("../../src/database/models/songs.model");
 
-    it("should have create song method", () =>{
-        expect(songService.createSong).toBeTruthy();
+describe("SongService", () => {
+  const service = new SongService();
+
+  it("should create a song", async () => {
+    (Song.create as jest.Mock).mockResolvedValue({
+      id: 1,
+      title: "Test Song",
     });
 
-    it("should have getAllSongs method", () =>{
-        expect(songService.getAllSongs).toBeDefined();
-    })
+    const result = await service.createSong({
+      title: "Test Song",
+      sheet_pdf: "url",
+      user_id: "etrgdrer1",
+      artist: "Artist",
+      usage: "Category"
+    });
 
-})
+    expect(Song.create).toHaveBeenCalled();
+    expect(result.title).toBe("Test Song");
+  });
+});
