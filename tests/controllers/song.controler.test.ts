@@ -54,4 +54,53 @@ describe("uploadSong controller", () => {
       })
     );
   });
+
+ 
+
+});
+
+describe("uploadSong controller - error cases", () => {
+  let req: any;
+  let res: any;
+
+  beforeEach(()=>{
+    req = {
+      body: {
+        artist: "A",
+        usage: "church",
+      },
+      files: {},
+      user: { id: 1 },
+    };
+
+    res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+    
+  });
+  it("should return 400 if title or pdf is missing", async () => {
+    await uploadSong(req, res);
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith(
+      expect.objectContaining({
+        message: "Title and PDF are required",
+      })
+    );
+  });
+
+  it("should handle upload errors", async () => {
+    (uploadToCloudinary as jest.Mock).mockRejectedValue(new Error("Upload failed"));
+    req.body.title = "Test Song";
+    req.files = {
+      pdf: [{ buffer: Buffer.from("pdf") }],
+    };
+    await uploadSong(req, res);
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith(
+      expect.objectContaining({
+        message: "Upload failed",
+      })
+    );
+  });
 });
