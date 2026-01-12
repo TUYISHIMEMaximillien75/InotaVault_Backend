@@ -2,7 +2,16 @@ import { uploadSong } from "../../src/controllers/song.controller";
 import { SongService } from "../../src/services/song.servicees";
 import { uploadToCloudinary } from "../../src/utils/cloudinaryUpload";
 
-jest.mock("../../src/services/song.servicees");
+jest.mock("../../src/services/song.servicees", () => {
+  return {
+    SongService: jest.fn().mockImplementation(() => ({
+      createSong: jest.fn().mockResolvedValue({
+        id: "uuid",
+        title: "Test Song",
+      }),
+    })),
+  };
+});
 jest.mock("../../src/utils/cloudinaryUpload");
 
 describe("uploadSong controller", () => {

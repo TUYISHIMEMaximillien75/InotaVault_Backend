@@ -4,7 +4,7 @@ export class SongService {
 
     createSong = async (songData: createSongAttributes) => {
         const song = await Song.create(songData);
-        return song;
+        return {sucess: true, song};
     }
 
     getAllSongs = async (filter: string) => {
