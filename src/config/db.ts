@@ -16,6 +16,7 @@ const PrefixConfig = () => {
 };
 
 const prefix = PrefixConfig();
+console.log(prefix);
 
 export const sequelize = new Sequelize(
   process.env[`DB_${prefix}_NAME`] as string,

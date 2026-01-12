@@ -21,5 +21,6 @@ userRouter.get("/profile", authMiddleware, (req: AuthRequest, res) => {
   });
 });
 
+userRouter.get("/verify/:id", userController.verifyUser);
 
 export { userRouter };

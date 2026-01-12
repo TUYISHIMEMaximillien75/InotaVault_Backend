@@ -11,6 +11,10 @@ export interface SongAttributes {
     audio_url?: string;
     video_url?: string;
     external_link?: string;
+    view_count?: number;
+    likes?: number;
+    artist: string;
+    usage: string;
 
     created_at: Date;
     updated_at: Date;
@@ -19,7 +23,7 @@ export interface SongAttributes {
 export interface SongCreationAttributes
     extends Optional<
         SongAttributes,
-        | "id" | "description" | "audio_url" | "video_url" | "external_link" | "created_at" | "updated_at"
+        | "id" | "description" | "audio_url" | "video_url" | "external_link" | "created_at" | "updated_at"| "likes"
     > { }
 
 export class Song
@@ -36,6 +40,10 @@ export class Song
   declare audio_url?: string;
   declare video_url?: string;
   declare external_link?: string;
+  declare view_count: number;
+  declare likes?: number;
+  declare artist: string;
+  declare usage: string;
 
   declare created_at: Date;
   declare updated_at: Date;
@@ -85,6 +93,25 @@ export const initSongModel = (sequelize: Sequelize) => {
       external_link: {
         type: DataTypes.STRING,
         allowNull: true,
+      },
+
+      view_count: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      likes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      artist: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      usage: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
 
       created_at: {
